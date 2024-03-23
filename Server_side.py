@@ -20,7 +20,7 @@ def handle_client(client_socket, address):
 # Main Server function
 def start_server():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(HOST, PORT)
+    server.bind((HOST, PORT))
     server.listen()
 
     print(f"Server running on {HOST} : {PORT}")
@@ -31,3 +31,5 @@ def start_server():
         client_thread = threading.Thread(target=handle_client, args=(client_socket, address))
         client_thread.start()
 
+if __name__ == "__main__":
+    start_server()
