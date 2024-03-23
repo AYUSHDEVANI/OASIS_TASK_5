@@ -23,6 +23,8 @@ def start_client():
     receive_thread.start()
 
     while True:
-        message = input()
+        message = input("Enter message: ")
         client.send(message.encode())
-        
+
+if __name__ == "__main__":
+    start_client()
