@@ -17,3 +17,17 @@ def handle_client(client_socket, address):
             if client != client_socket:
                 client.send(message.encode())
 
+# Main Server function
+def start_server():
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind(HOST, PORT)
+    server.listen()
+
+    print(f"Server running on {HOST} : {PORT}")
+
+    while True:
+        client_socket, address = server.accept()
+        clients.append(client_socket)
+        client_thread = threading.Thread(target=handle_client, args=(client_socket, address))
+        client_thread.start()
+
