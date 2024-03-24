@@ -1,30 +1,17 @@
-
 import socket
-import threading
 
-# Client configuration
-HOST = "127.0.0.1"
-PORT = 8888
-
-
-# Function to receive messages from server 
-def receive_messages(client_socket):
-    while True:
-        message = client_socket.recv(1024).decode()
-        print(message)
-
-
-# Main Client Function
-def start_client():
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect((HOST, PORT))
-
-    receive_thread = threading.Thread(target=receive_messages, args=(client,))
-    receive_thread.start()
-
-    while True:
-        message = input("Enter message: ")
-        client.send(message.encode())
-
-if __name__ == "__main__":
-    start_client()
+s = socket.socket()
+host = socket.gethostname()
+port = 8080
+s.connect((host, port))
+print('Connected to chat server')
+while 1:
+    incoming_message = s.recv(1024)
+    incoming_message = incoming_message.decode()
+    print(' Server : ', incoming_message)
+    print()
+    message = input(str('>> '))
+    message = message.encode()
+    s.send(message)
+    print('Sent')
+    print()
