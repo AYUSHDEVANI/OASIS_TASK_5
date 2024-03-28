@@ -2,6 +2,7 @@ import socket
 
 s = socket.socket()
 host = socket.gethostname()
+
 print(' Server will start on host : ', host)
 port = 8080
 s.bind((host, port))
